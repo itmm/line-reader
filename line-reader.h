@@ -21,7 +21,7 @@ public:
 };
 
 
-bool operator==(const File_Position &a, const File_Position &b) {
+inline bool operator==(const File_Position &a, const File_Position &b) {
 	return a.line() == b.line() && a.file_name() == b.file_name();
 }
 
