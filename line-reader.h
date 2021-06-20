@@ -18,6 +18,7 @@ public:
 	File_Position &operator++() { ++line_; return *this; }
 
 	File_Position parse_line_macro(const std::string &line);
+	std::ostream &change_pos(std::ostream &out, const File_Position &pos);
 };
 
 

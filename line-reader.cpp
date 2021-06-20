@@ -25,6 +25,16 @@ File_Position File_Position::parse_line_macro(const std::string &line) {
 	return File_Position { };
 
 }
+
+std::ostream &File_Position::change_pos(std::ostream &out, const File_Position &pos) {
+	if (pos == *this) { return out; }
+	out << "#line " << pos.line();
+	if (pos.file_name() != file_name()) {
+		out << " \"" << pos.file_name() << '"';
+	}
+	return out << '\n';
+}
+
 bool Line_Reader::next(std::string &line) {
 	for (;;) {
 		if (! std::getline(in_, line)) { return false; }
@@ -35,3 +45,4 @@ bool Line_Reader::next(std::string &line) {
 	++pos_;
 	return true;
 }
+
