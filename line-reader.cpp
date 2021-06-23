@@ -1,3 +1,4 @@
+#include <sstream>
 #include "line-reader.h"
 
 File_Position File_Position::parse_line_macro(const std::string &line) {
@@ -26,13 +27,21 @@ File_Position File_Position::parse_line_macro(const std::string &line) {
 
 }
 
-std::ostream &File_Position::change_pos(std::ostream &out, const File_Position &pos) {
-	if (pos == *this) { return out; }
+std::string File_Position::line_macro(const File_Position &pos) {
+	if (pos == *this) { return std::string { }; }
+	std::ostringstream out;
+
 	out << "#line " << pos.line();
 	if (pos.file_name() != file_name()) {
 		out << " \"" << pos.file_name() << '"';
 	}
-	return out << '\n';
+	*this = pos;
+	return out.str();
+}
+
+std::ostream &File_Position::change_pos(std::ostream &out, const File_Position &pos) {
+	if (pos == *this) { return out; }
+	return out << line_macro(pos) << '\n';
 }
 
 bool Line_Reader::next(std::string &line) {
