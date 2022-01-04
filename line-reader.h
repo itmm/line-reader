@@ -54,6 +54,7 @@ public:
 
 class Line_Reader_Pool {
 	std::list<std::unique_ptr<Line_Reader>> pool_;
+	File_Position empty_pos_ { "no-file", -1 };
 public:
 	void populate(int argc, const char *argv[]) {
 		bool no_args { false };
@@ -83,7 +84,7 @@ public:
 		pool_.push_front(std::make_unique<Line_Reader>(file_name, in));
 	}
 	const File_Position &pos() const {
-		return pool_.front()->pos();
+		return pool_.empty() ? empty_pos_ : pool_.front()->pos();
 	}
 	bool next(std::string &line) {
 		while (! pool_.empty()) {
