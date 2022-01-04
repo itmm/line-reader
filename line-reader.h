@@ -19,6 +19,7 @@ public:
 	[[nodiscard]] const std::string &file_name() const { return file_name_; };
 	[[nodiscard]] int line() const { return line_; }
 	File_Position &operator++() { ++line_; return *this; }
+	File_Position &operator--() { --line_; return *this; }
 
 	File_Position parse_line_macro(const std::string &line);
 	std::string line_macro(const File_Position &pos);
