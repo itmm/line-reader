@@ -1,5 +1,5 @@
 #include <sstream>
-#include "line-reader.h"
+#include "line-reader/line-reader.h"
 
 File_Position File_Position::parse_line_macro(const std::string &line) const {
 	do {
