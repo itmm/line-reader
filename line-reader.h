@@ -21,9 +21,12 @@ public:
 	File_Position &operator++() { ++line_; return *this; }
 	File_Position &operator--() { --line_; return *this; }
 
-	File_Position parse_line_macro(const std::string &line);
+	[[nodiscard]] File_Position parse_line_macro(const std::string &line) const;
 	std::string line_macro(const File_Position &pos);
-	std::ostream &change_pos(std::ostream &out, const File_Position &pos);
+
+	[[maybe_unused]] std::ostream &change_pos(
+		std::ostream &out, const File_Position &pos
+	);
 };
 
 
@@ -84,7 +87,7 @@ public:
 	void push_front(const std::string &file_name, std::istream &in) {
 		pool_.push_front(std::make_unique<Line_Reader>(file_name, in));
 	}
-	const File_Position &pos() const {
+	[[nodiscard]] const File_Position &pos() const {
 		return pool_.empty() ? empty_pos_ : pool_.front()->pos();
 	}
 	bool next(std::string &line) {

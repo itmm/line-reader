@@ -1,7 +1,7 @@
 #include <sstream>
 #include "line-reader.h"
 
-File_Position File_Position::parse_line_macro(const std::string &line) {
+File_Position File_Position::parse_line_macro(const std::string &line) const {
 	do {
 		if (line.substr(0, 6) != "#line ") { break; }
 
@@ -39,7 +39,9 @@ std::string File_Position::line_macro(const File_Position &pos) {
 	return out.str();
 }
 
-std::ostream &File_Position::change_pos(std::ostream &out, const File_Position &pos) {
+[[maybe_unused]] std::ostream &File_Position::change_pos(
+	std::ostream &out, const File_Position &pos
+) {
 	if (pos == *this) { return out; }
 	return out << line_macro(pos) << '\n';
 }
