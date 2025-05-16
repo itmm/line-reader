@@ -49,6 +49,7 @@ std::string File_Position::line_macro(const File_Position &pos) {
 bool Line_Reader::next(std::string &line) {
 	for (;;) {
 		if (! std::getline(in_, line)) { return false; }
+		if (! line.empty() && line.back() == '\r') { line.pop_back(); }
 		File_Position p { pos_.parse_line_macro(line) };
 		if (p) { pos_ = p; --pos_; continue; }
 		break;
