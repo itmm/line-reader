@@ -22,3 +22,4 @@ $(LIB): $(L_OBJECTS) $(L_HEADER)
 
 clean:
 	@echo remove temporaries
+	@rm -f $(LIB) *.o
