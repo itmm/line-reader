@@ -52,7 +52,8 @@ class File_Line_Reader: public Line_Reader {
 	std::ifstream file_;
 public:
 	explicit File_Line_Reader(const std::string &file_name):
-		file_ { file_name.c_str() }, Line_Reader { file_name, file_ }
+		Line_Reader { file_name, file_ },
+		file_ { file_name.c_str() }
 	{ }
 };
 

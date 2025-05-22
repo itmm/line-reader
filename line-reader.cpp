@@ -5,7 +5,7 @@ File_Position File_Position::parse_line_macro(const std::string &line) const {
 	do {
 		if (line.substr(0, 6) != "#line ") { break; }
 
-		int idx { 6 };
+		std::string::size_type idx { 6 };
 		int pos { 0 };
 		while (idx < line.length() && isdigit(line[idx])) {
 			pos = pos * 10 + line[idx++] - '0';
