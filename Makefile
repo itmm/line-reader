@@ -18,7 +18,7 @@ line-reader.o: include/line-reader/line-reader.h
 
 $(LIB): $(L_OBJECTS) $(L_HEADER)
 	@echo building $@
-	@$(AR) -cr $@ $^
+	@$(AR) -cr $@ $(L_OBJECTS)
 
 clean:
 	@echo remove temporaries
